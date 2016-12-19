@@ -7,9 +7,16 @@ class ReleaseController < ApplicationController
 
 
   def generate_release
+  	@selected_version = Version.where(:id =>  params[:version_id])[0]
+  	document_name = 'Release_' + @selected_version.name + '.docx'
 
-  	puts "cheguei"
-  	put "cheguei 2"
+  	@issues = Issue.where(:fixed_version_id => @selected_version.id)
+
+
+	
+
+	render docx: 'template_release', filename: document_name
+
   end
 
 end
