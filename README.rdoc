@@ -1,3 +1,5 @@
 = simple_release_notes
 
-Description goes here
+A simple plugin to help release notes process.
+
+Here will be placed more info about the plugin's!
