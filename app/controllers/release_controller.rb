@@ -8,7 +8,7 @@ class ReleaseController < ApplicationController
 
   def generate_release
   	@selected_version = Version.where(:id =>  params[:version_id])[0]
-  	document_name = 'Release_' + @selected_version.name + '.docx'
+  	document_name = 'Release_Notes_' + @selected_version.name + '.docx'
 
   	@issues = Issue.where(:fixed_version_id => @selected_version.id)
 
