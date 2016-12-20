@@ -12,6 +12,8 @@ class ReleaseController < ApplicationController
     path = 'C:\\Users\\gsan\\Documents\\Diego\\workspace\\redmine\\plugins\\simple_release_notes\\app\\views\\template'
     template = path + '\\' + 'template_consenso.odt'
 
+    time = Time.now
+
   	@issues = Issue.where(:fixed_version_id => @selected_version.id)
    
 
@@ -20,7 +22,7 @@ class ReleaseController < ApplicationController
 
     report = ODFReport::Report.new(template) do |r|
       r.add_field  :VERSION_NAME, @selected_version.name
-      r.add_field  :RELEASE_DATE, Date.today.to_s
+      r.add_field  :RELEASE_DATE, time.strftime("%d/%m/%Y")
 
       r.add_table("evol_table", @evol_issues, :header=>true) do |t|
         t.add_column(:RM_EVOL_ID,:id || "")
