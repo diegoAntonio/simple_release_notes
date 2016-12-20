@@ -15,7 +15,9 @@ class ReleaseController < ApplicationController
     time = Time.now
 
   	@issues = Issue.where(:fixed_version_id => @selected_version.id)
-   
+
+    puts params[:product]
+    puts params[:environment]
 
     @evol_issues = @issues.select { |issue| issue.tracker.name == 'Evolutivas' }
     @corrective_issues = @issues.select { |issue| issue.tracker.name == 'Corretivas' }
@@ -23,6 +25,8 @@ class ReleaseController < ApplicationController
     report = ODFReport::Report.new(template) do |r|
       r.add_field  :VERSION_NAME, @selected_version.name
       r.add_field  :RELEASE_DATE, time.strftime("%d/%m/%Y")
+      r.add_field  :PRODUCT_NAME, params[:product]
+      r.add_field  :TARGET_ENV, params[:environment]
 
       r.add_table("evol_table", @evol_issues, :header=>true) do |t|
         t.add_column(:RM_EVOL_ID,:id || "")
