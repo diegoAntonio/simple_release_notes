@@ -8,15 +8,36 @@ class ReleaseController < ApplicationController
 
   def generate_release
   	@selected_version = Version.where(:id =>  params[:version_id])[0]
-  	document_name = 'Release_Notes_' + @selected_version.name + '.docx'
+  	document_name = 'Release_Notes_' + @selected_version.name + '.odt'
+    path = 'C:\\Users\\gsan\\Documents\\Diego\\workspace\\redmine\\plugins\\simple_release_notes\\app\\views\\template'
+    template = path + '\\' + 'template_consenso.odt'
 
   	@issues = Issue.where(:fixed_version_id => @selected_version.id)
+   
+
+    @evol_issues = @issues.select { |issue| issue.tracker.name == 'Evolutivas' }
+    @corrective_issues = @issues.select { |issue| issue.tracker.name == 'Corretivas' }
+
+    report = ODFReport::Report.new(template) do |r|
+      r.add_field  :VERSION_NAME, @selected_version.name
+      r.add_field  :RELEASE_DATE, Date.today.to_s
+
+      r.add_table("evol_table", @evol_issues, :header=>true) do |t|
+        t.add_column(:RM_EVOL_ID,:id || "")
+        t.add_column(:RM_EVOL_DESCRIPTION,:description || "")
+      end
 
 
-	
+      r.add_table("corrective_table", @corrective_issues, :header=>true) do |t|
+        t.add_column(:RM_CORRE_ID, :id || "")
+        t.add_column(:RM_CORRE_DESCRIPTION,:description || "") 
+      end
 
-	render docx: 'template_release', filename: document_name
+    end
 
+
+    send_data report.generate, type: 'application/vnd.oasis.opendocument.text',
+                              disposition: 'attachment',
+                              filename: document_name
   end
-
 end

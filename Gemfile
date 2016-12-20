@@ -1,3 +1,3 @@
 source 'http://rubygems.org'
  
-gem 'htmltoword', '0.5.1'
+gem 'odf-report'
