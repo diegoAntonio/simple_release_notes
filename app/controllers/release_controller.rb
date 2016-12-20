@@ -7,17 +7,13 @@ class ReleaseController < ApplicationController
 
 
   def generate_release
-  	@selected_version = Version.where(:id =>  params[:version_id])[0]
+  	@selected_version = Version.where(:id =>  params[:version_id]).first
   	document_name = 'Release_Notes_' + @selected_version.name + '.odt'
     path = "#{Rails.root}/plugins/simple_release_notes/public/template"
     template = path + '/' + 'template_consenso.odt'
-
     time = Time.now
 
   	@issues = Issue.where(:fixed_version_id => @selected_version.id)
-
-    puts params[:product]
-    puts params[:environment]
 
     @evol_issues = @issues.select { |issue| issue.tracker.name == 'Evolutivas' }
     @corrective_issues = @issues.select { |issue| issue.tracker.name == 'Corretivas' }
