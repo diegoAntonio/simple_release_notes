@@ -9,8 +9,8 @@ class ReleaseController < ApplicationController
   def generate_release
   	@selected_version = Version.where(:id =>  params[:version_id])[0]
   	document_name = 'Release_Notes_' + @selected_version.name + '.odt'
-    path = 'C:\\Users\\gsan\\Documents\\Diego\\workspace\\redmine\\plugins\\simple_release_notes\\app\\views\\template'
-    template = path + '\\' + 'template_consenso.odt'
+    path = "#{Rails.root}/plugins/simple_release_notes/public/template"
+    template = path + '/' + 'template_consenso.odt'
 
     time = Time.now
 
