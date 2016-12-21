@@ -1,3 +1,8 @@
+<% content_for :header_tags do %>
+    <%= stylesheet_link_tag 'plugin.css', :plugin => 'simple_release_notes' %>
+<% end %>
+
+
 <h2>Simple Release Notes</h2>
 
 <%= form_tag gerar_release_path, method: :get do %>
@@ -6,7 +11,7 @@
 		
 		<tr> 
 			<td><p><%=label(:version_id,'Selecione uma versão:') %></p></td>
-			<td><%= select_tag(:version_id, options_for_select(@tag_versions), :prompt => "")%></td>
+			<td><%= select_tag(:version_id, options_for_select(@tag_versions), :prompt => "",class: "select-table")%></td>
 		</tr>
 
 		<tr>
@@ -18,7 +23,6 @@
 			<td><%=label(:environment,'Informe o ambiente:') %></td>
 			<td><%= text_field_tag(:environment,nil,maxlength:20) %></td>
 		</tr>
-
 	</table>
 	<br/>
 
