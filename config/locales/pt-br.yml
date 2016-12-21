@@ -1,3 +1,11 @@
-# English strings go here for Rails i18n
 pt-br:
-  # my_label: "My label"
+  # Title
+  plugin_title: "Simple Release Notes"
+  
+  #labels
+  label_select_versions: "Selecione uma versão:"
+  label_text_field_product: "Informe o nome do produto:"
+  label_text_field_environment: "Informe o ambiente:"
+  
+  #buttons
+  btn_generate_release: "Gerar Release"
