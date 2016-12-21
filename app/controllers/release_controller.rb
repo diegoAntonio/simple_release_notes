@@ -9,7 +9,7 @@ class ReleaseController < ApplicationController
   def generate_release
   	@selected_version = Version.where(:id =>  params[:version_id]).first
   	document_name = 'Release_Notes_' + @selected_version.name + '.odt'
-    path = "#{Rails.root}/plugins/simple_release_notes/public/template"
+    path = "#{Rails.public_path}/plugin_assets/simple_release_notes/template"
     template = path + '/' + 'template_consenso.odt'
     time = Time.now
 
