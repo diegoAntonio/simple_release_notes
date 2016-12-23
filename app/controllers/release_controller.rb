@@ -1,7 +1,8 @@
 class ReleaseController < ApplicationController
   unloadable
 
-  before_filter :authorize
+  before_filter :find_project, :authorize, :only => :index
+
   def index
   	@tag_versions = Version.all.order(:created_on).all.map { |ver| [ver.name, ver.id] };
   end
@@ -43,4 +44,10 @@ class ReleaseController < ApplicationController
                               disposition: 'attachment',
                               filename: document_name
   end
+end
+
+private
+
+def find_project
+   @project = Project.find(params[:project_id])
 end
