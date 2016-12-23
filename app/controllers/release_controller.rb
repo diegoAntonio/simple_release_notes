@@ -1,6 +1,7 @@
 class ReleaseController < ApplicationController
   unloadable
 
+  before_filter :authorize
   def index
   	@tag_versions = Version.all.order(:created_on).all.map { |ver| [ver.name, ver.id] };
   end
