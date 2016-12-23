@@ -1,12 +1,15 @@
 # English strings go here for Rails i18n
 en:
 # Title
-  plugin_title: "Simple Release Notes"
+  plugin_title: Simple Release Notes
   
   #labels
-  label_select_versions: "Select a version:"
-  label_text_field_product: "Inform the product name:"
-  label_text_field_environment: "Inform the environment:"
+  label_select_versions: Select a version
+  label_text_field_product: Inform the product name
+  label_text_field_environment: Inform the environment
+  label_success: Release notes successfully generated
   
   #buttons
-  btn_generate_release: "Generate Release"
+  btn_generate_release: Generate Release
+  btn_return: Back
+  permission_generate_releases: Generate Releases

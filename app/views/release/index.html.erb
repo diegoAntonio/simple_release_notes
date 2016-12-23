@@ -3,30 +3,30 @@
 <% end %>
 
 
-<h2>Simple Release Notes</h2>
+<h2><%= title l(:plugin_title) %></h2>
 
 <%= form_tag gerar_release_path, method: :get do %>
 
 	<table>
 		
 		<tr> 
-			<td><p><%=label(:version_id,'Selecione uma versão:') %></p></td>
+			<td><p><%=label(:version_id,l(:label_select_versions)) %></p></td>
 			<td><%= select_tag(:version_id, options_for_select(@tag_versions), :prompt => "",class: "select-table")%></td>
 		</tr>
 
 		<tr>
-			<td><%=label(:product, 'Informe o nome do produto:') %></td>
+			<td><%=label(:product, l(:label_text_field_product)) %></td>
 			<td><%= text_field_tag(:product,nil,maxlength:50) %></td>
 		</tr>
 			
 		<tr>
-			<td><%=label(:environment,'Informe o ambiente:') %></td>
+			<td><%=label(:environment,l(:label_text_field_environment)) %></td>
 			<td><%= text_field_tag(:environment,nil,maxlength:50) %></td>
 		</tr>
 	</table>
 	<br/>
 
-	<%= button_to "Gerar Release", nil %>
+	<%= button_to l(:btn_generate_release), nil %>
 <% end %>
 
 

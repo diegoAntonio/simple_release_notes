@@ -1,11 +1,14 @@
-pt-br:
+pt-BR:
   # Title
-  plugin_title: "Simple Release Notes"
+  plugin_title: Simple Release Notes
   
   #labels
-  label_select_versions: "Selecione uma versão:"
-  label_text_field_product: "Informe o nome do produto:"
-  label_text_field_environment: "Informe o ambiente:"
+  label_select_versions: Selecione uma versão
+  label_text_field_product: Informe o nome do produto
+  label_text_field_environment: Informe o ambiente
+  label_success: Release Notes gerada com sucesso
   
   #buttons
-  btn_generate_release: "Gerar Release"
+  btn_generate_release: Gerar Release
+  btn_return: Voltar
+  permission_generate_releases: Gerar Releases
