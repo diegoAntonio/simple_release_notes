@@ -2,7 +2,6 @@ class ReleaseController < ApplicationController
   unloadable
 
   before_filter :find_project, :authorize, :only => :index
-   helper :release
 
   def index
   	@tag_versions = Version.all.order(:created_on).all.map { |ver| [ver.name, ver.id] };
@@ -16,12 +15,12 @@ class ReleaseController < ApplicationController
     template = path + '/' + 'template_consenso.odt'
     time = Time.now
 
-    puts @release.get_propertie("id_evolutivas")
+    id_evolutivas = get_propertie("id_evolutivas")
 
   	@issues = Issue.where(:fixed_version_id => @selected_version.id)
 
-    @evol_issues = @issues.select { |issue| issue.tracker.id ==  }
-    @corrective_issues = @issues.select { |issue| issue.tracker.id != 'Corretivas' }
+    @evol_issues = @issues.select { |issue| issue.tracker.id == id_evolutivas}
+    @corrective_issues = @issues.select { |issue| issue.tracker.id != id_evolutivas }
 
     report = ODFReport::Report.new(template) do |r|
       r.add_field  :VERSION_NAME, @selected_version.name
@@ -53,4 +52,10 @@ private
 
 def find_project
    @project = Project.find(params[:project_id])
+end
+
+def get_propertie(propertie_name)
+    properties_path = "#{Rails.public_path}/plugin_assets/simple_release_notes/properties/properties.yaml"
+    properties = YAML.load_file(properties_path)
+    properties[propertie_name]
 end
