@@ -2,6 +2,7 @@ class ReleaseController < ApplicationController
   unloadable
 
   before_filter :find_project, :authorize, :only => :index
+   helper :release
 
   def index
   	@tag_versions = Version.all.order(:created_on).all.map { |ver| [ver.name, ver.id] };
@@ -15,10 +16,12 @@ class ReleaseController < ApplicationController
     template = path + '/' + 'template_consenso.odt'
     time = Time.now
 
+    puts @release.get_propertie("id_evolutivas")
+
   	@issues = Issue.where(:fixed_version_id => @selected_version.id)
 
-    @evol_issues = @issues.select { |issue| issue.tracker.name == 'Evolutivas' }
-    @corrective_issues = @issues.select { |issue| issue.tracker.name == 'Corretivas' }
+    @evol_issues = @issues.select { |issue| issue.tracker.id ==  }
+    @corrective_issues = @issues.select { |issue| issue.tracker.id != 'Corretivas' }
 
     report = ODFReport::Report.new(template) do |r|
       r.add_field  :VERSION_NAME, @selected_version.name
