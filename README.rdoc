@@ -1,5 +1,60 @@
 = simple_release_notes
 
-A simple plugin to help release notes process.
+A simple plugin to help release notes process with Redmine.
 
-Here will be placed more info about the plugin's!
+= Why do we create a plugin?
+
+Because we need an way to automatize
+the Release Notes process using something
+that search redmine's issues and filter
+by a Version especific.
+
+= How it works?
+
+We use some Version Previously Registered
+to filter especifcs issues and generate
+an oficial Release Notes document using
+an specific template.
+
+= Warning
+
+I'm still evolving the code to find a way
+to generate totally custom templates. Wich 
+doesn't happens today.
+
+
+= Install
+1.Go to redmine install path
+ <redmine_install_path>/plugins/
+
+2.Clone the repository:
+ git clone https://github.com/diegoAntonio/simple_release_notes.git
+
+3.Reiniciar the redmine
+ service apache2 restart 
+
+4.Back to <redmine_install_path> and use the command:
+  bundle update
+
+5.Go to Administration > Plugins.
+  There should be the following plugin: Simple Release Notes, Author: Diego Antônio Ferreira.
+
+6.Go to Administration > Roles and Permissions > Permissions Report
+  Give permission to respective role and save.
+
+7.Go to Administration > Projects> Configuration Project > Settings > Modules
+  Enable the following module: *Simple* *release* *notes* and save.
+
+= Contribute
+
+Fork it, create a branch, develop something 
+and submit sobre code!
+
+= TODO's
+1.Leave the code/template structure more generic.
+
+2.Create some Tests.
+
+3.Test with more versions (Only tested with redmine 3.3.1 and 3.0.3)
+
+Diego Ferreira - 2016

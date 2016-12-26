@@ -1,3 +1,3 @@
 source 'http://rubygems.org'
  
-gem 'odf-report'
+gem 'odf-report', '0.5.1'
