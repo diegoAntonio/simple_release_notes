@@ -4,7 +4,9 @@ class ReleaseController < ApplicationController
   before_filter :find_project, :authorize, :only => :index
 
   def index
-  	@tag_versions = Version.where(:status => 'open').order(:created_on).all.map { |ver| [ver.name, ver.id] };
+    project_default = get_propertie("id_project_default")
+  	@tag_versions = Version.where(:status => 'open', :project_id => project_default).
+                            order(:created_on).all.map { |ver| [ver.name, ver.id] };
   end
 
 
@@ -14,6 +16,7 @@ class ReleaseController < ApplicationController
     path = "#{Rails.public_path}/plugin_assets/simple_release_notes/template"
     template = path + '/' + 'template_consenso.odt'
     time = Time.now
+    is_private_false = 0
 
     @id_pronta_pra_homolog = get_propertie("id_pronta_pra_homolog")
     @id_concluida = get_propertie("id_concluida")
@@ -21,7 +24,8 @@ class ReleaseController < ApplicationController
     @valid_issues_states = [@id_pronta_pra_homolog, @id_concluida];    
 
   	@issues = Issue.where(:fixed_version_id => @selected_version.id, 
-                          :status_id => @valid_issues_states)
+                          :status_id => @valid_issues_states,
+                          :isprivate => is_private_false)
 
     report = ODFReport::Report.new(template) do |r|
       r.add_field  :VERSION_NAME, @selected_version.name
