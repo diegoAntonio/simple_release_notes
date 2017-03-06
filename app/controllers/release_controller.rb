@@ -15,10 +15,13 @@ class ReleaseController < ApplicationController
     template = path + '/' + 'template_consenso.odt'
     time = Time.now
 
-    #TODO: Remover lixo de codigo abaixo
-    #id_evolutivas = get_propertie("id_evolutivas")
+    @id_pronta_pra_homolog = get_propertie("id_pronta_pra_homolog")
+    @id_concluida = get_propertie("id_concluida")
 
-  	@issues = Issue.where(:fixed_version_id => @selected_version.id)
+    @valid_issues_states = [@id_pronta_pra_homolog, @id_concluida];    
+
+  	@issues = Issue.where(:fixed_version_id => @selected_version.id, 
+                          :status_id => @valid_issues_states)
 
     report = ODFReport::Report.new(template) do |r|
       r.add_field  :VERSION_NAME, @selected_version.name
@@ -30,9 +33,7 @@ class ReleaseController < ApplicationController
         t.add_column(:RM_ID, :id || "")
         t.add_column(:RM_SUBJECT, :subject || "") 
       end
-
     end
-
 
     send_data report.generate, type: 'application/vnd.oasis.opendocument.text',
                               disposition: 'attachment',
