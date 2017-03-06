@@ -18,10 +18,11 @@ class ReleaseController < ApplicationController
     time = Time.now
     is_private_false = 0
 
-    @id_pronta_pra_homolog = get_propertie("id_pronta_pra_homolog")
-    @id_concluida = get_propertie("id_concluida")
+    id_pronta_pra_homolog = get_propertie("id_pronta_pra_homolog")
+    id_concluida = get_propertie("id_concluida")
+    id_concluido = get_propertie("id_concluido")
 
-    @valid_issues_states = [@id_pronta_pra_homolog, @id_concluida];    
+    @valid_issues_states = [id_pronta_pra_homolog, id_concluida,id_concluido];    
 
   	@issues = Issue.where(:fixed_version_id => @selected_version.id, 
                           :status_id => @valid_issues_states,
