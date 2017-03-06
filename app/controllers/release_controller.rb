@@ -4,7 +4,7 @@ class ReleaseController < ApplicationController
   before_filter :find_project, :authorize, :only => :index
 
   def index
-  	@tag_versions = Version.all.order(:created_on).all.map { |ver| [ver.name, ver.id] };
+  	@tag_versions = Version.where(:status => 'open').order(:created_on).all.map { |ver| [ver.name, ver.id] };
   end
 
 
