@@ -15,12 +15,10 @@ class ReleaseController < ApplicationController
     template = path + '/' + 'template_consenso.odt'
     time = Time.now
 
-    id_evolutivas = get_propertie("id_evolutivas")
+    #TODO: Remover lixo de codigo abaixo
+    #id_evolutivas = get_propertie("id_evolutivas")
 
   	@issues = Issue.where(:fixed_version_id => @selected_version.id)
-
-    @evol_issues = @issues.select { |issue| issue.tracker.id == id_evolutivas}
-    @corrective_issues = @issues.select { |issue| issue.tracker.id != id_evolutivas }
 
     report = ODFReport::Report.new(template) do |r|
       r.add_field  :VERSION_NAME, @selected_version.name
@@ -28,15 +26,9 @@ class ReleaseController < ApplicationController
       r.add_field  :PRODUCT_NAME, params[:product]
       r.add_field  :TARGET_ENV, params[:environment]
 
-      r.add_table("evol_table", @evol_issues, :header=>true) do |t|
-        t.add_column(:RM_EVOL_ID,:id || "")
-        t.add_column(:RM_EVOL_DESCRIPTION,:description || "")
-      end
-
-
-      r.add_table("corrective_table", @corrective_issues, :header=>true) do |t|
-        t.add_column(:RM_CORRE_ID, :id || "")
-        t.add_column(:RM_CORRE_DESCRIPTION,:description || "") 
+      r.add_table("rms_table", @issues, :header=>true) do |t|
+        t.add_column(:RM_ID, :id || "")
+        t.add_column(:RM_SUBJECT, :subject || "") 
       end
 
     end
