@@ -25,7 +25,7 @@ class ReleaseController < ApplicationController
 
   	@issues = Issue.where(:fixed_version_id => @selected_version.id, 
                           :status_id => @valid_issues_states,
-                          :isprivate => is_private_false)
+                          :is_private => is_private_false)
 
     report = ODFReport::Report.new(template) do |r|
       r.add_field  :VERSION_NAME, @selected_version.name
