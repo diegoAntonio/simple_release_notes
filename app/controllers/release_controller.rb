@@ -21,8 +21,9 @@ class ReleaseController < ApplicationController
     id_pronta_pra_homolog = get_propertie("id_pronta_pra_homolog")
     id_concluida = get_propertie("id_concluida")
     id_concluido = get_propertie("id_concluido")
+    id_pronto = get_propertie("id_pronto")
 
-    @valid_issues_states = [id_pronta_pra_homolog, id_concluida,id_concluido];    
+    @valid_issues_states = [id_pronta_pra_homolog, id_concluida, id_concluido, id_pronto];    
 
   	@issues = Issue.where(:fixed_version_id => @selected_version.id, 
                           :status_id => @valid_issues_states,
