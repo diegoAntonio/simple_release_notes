@@ -28,6 +28,7 @@ class ReleaseController < ApplicationController
   	@issues = Issue.where(:fixed_version_id => @selected_version.id, 
                           :status_id => @valid_issues_states,
                           :is_private => is_private_false)
+                          .order("tracker_id","id")
 
     report = ODFReport::Report.new(template) do |r|
       r.add_field  :VERSION_NAME, @selected_version.name
@@ -38,6 +39,7 @@ class ReleaseController < ApplicationController
       r.add_table("rms_table", @issues, :header=>true) do |t|
         t.add_column(:RM_ID, :id || "")
         t.add_column(:RM_SUBJECT, :subject || "") 
+        t.add_column(:RM_TYPE) {|issue| "#{issue.tracker.name}" }
       end
     end
 
