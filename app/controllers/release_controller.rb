@@ -19,7 +19,7 @@ class ReleaseController < ApplicationController
     is_private_false = 0
     custom_issues_lst = nil
     custom_msg = ' '
-    parameter_custom_issues = params[:custom_issues]
+    parameter_custom_issues = params[:custom_issues].to_s
 
     id_pronta_pra_homolog = get_propertie("id_pronta_pra_homolog")
     id_concluida = get_propertie("id_concluida")
@@ -33,16 +33,16 @@ class ReleaseController < ApplicationController
                           :is_private => is_private_false)
                           .order("tracker_id","id")
 
-      custom_issues_lst = Issue.where(:id => parameter_custom_issues)
+    custom_issues_lst = Issue.where(:id => parameter_custom_issues.split(',').map(&:to_i))
 
-      if !custom_issues_lst.empty?
-        custom_issues_lst.each do |issue|
-          issue.subject = issue.subject + "*"
-        end
-        
-        @issues.push(*custom_issues_lst)
-        custom_msg = '* Significa RM\'s entregues de forma parcial.'
+    if !custom_issues_lst.empty?
+      custom_issues_lst.each do |issue|
+        issue.subject = issue.subject + "*"
       end
+        
+      @issues.push(*custom_issues_lst)
+      custom_msg = '* Significa RM\'s entregues de forma parcial.'
+    end
 
     report = ODFReport::Report.new(template) do |r|
       r.add_field  :VERSION_NAME, @selected_version.name
