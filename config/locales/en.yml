@@ -8,6 +8,7 @@ en:
   label_text_field_product: Inform the product name
   label_text_field_environment: Inform the environment
   label_success: Release notes successfully generated
+  label_text_field_custom_issues: Also will be included the following issues (Separated by commas)
   
   #buttons
   btn_generate_release: Generate Release

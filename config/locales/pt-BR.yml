@@ -7,6 +7,7 @@ pt-BR:
   label_text_field_product: Informe o nome do produto
   label_text_field_environment: Informe o ambiente
   label_success: Release Notes gerada com sucesso
+  label_text_field_custom_issues: Incluir RM's avulsas (Separadas por vírgula)
   
   #buttons
   btn_generate_release: Gerar Release

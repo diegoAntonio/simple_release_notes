@@ -23,6 +23,12 @@
 			<td><%=label(:environment,l(:label_text_field_environment)) %></td>
 			<td><%= text_field_tag(:environment,nil,maxlength:50) %></td>
 		</tr>
+
+		<tr>
+			<td><%=label(:custom_issues,l(:label_text_field_custom_issues)) %></td>
+			<td><%= text_area(:custom_issues,nil) %></td>
+		</tr>
+
 	</table>
 	<br/>
 
