@@ -19,7 +19,7 @@ class ReleaseController < ApplicationController
     is_private_false = 0
     custom_issues_lst = nil
     custom_msg = ' '
-    parameter_custom_issues = params[:custom_issues].to_s
+    parameter_custom_issues = params[:custom_issues][0].to_s
 
     id_pronta_pra_homolog = get_propertie("id_pronta_pra_homolog")
     id_concluida = get_propertie("id_concluida")
