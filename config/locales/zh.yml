@@ -1,0 +1,16 @@
+# Simple Chinese strings go here for Rails i18n
+zh:
+# Title
+  plugin_title: Simple Release Notes
+
+  #labels
+  label_select_versions: 请选择版本
+  label_text_field_product: 产品名称
+  label_text_field_environment: 产品运行环境
+  label_success: 发布日志已添加。
+  label_text_field_custom_issues: 还将包括以下问题（用逗号隔开）
+
+  #buttons
+  btn_generate_release: 生成发布日志
+  btn_return: 返回
+  permission_generate_releases: 生成发布日志
